@@ -1,0 +1,11 @@
+import numpy as np
+import pandas as pd
+
+
+def data_preparation():
+    data.drop_duplicates(subset=['id'], inplace=True, keep='last')
+    data['date'] = pd.to_datetime( data['date'] )
+    data['week_of_year'] = data['date'].dt.isocalendar().week
+    data = data.astype({"week_of_year": int})
+    bad_values = ((data['bedrooms'] > 10))
+    data = data[~bad_values]
